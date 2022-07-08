@@ -1,0 +1,13 @@
+.content {
+    border: 5px solid #e1bee7;
+    background-color: #fff1ff;
+
+    display: grid;
+    grid-template-columns: 100px 200px 300px;
+    grid-template-rows: 150px 250px;
+}
+
+.item {
+    border: 5px solid #00bcd4;
+    font-size: 4rem;
+}
