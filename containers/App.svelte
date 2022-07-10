@@ -1,32 +1,24 @@
 
 <script>
 	import Grid from './../src/components/Grid.svelte';
-    import { currentView } from '../src/components/store/store.js';
     import { fly } from 'svelte/transition';
     import { Confetti } from "svelte-confetti"
 
-	const views = [Grid]
+	let state = 0;
 
-	let viewportComponent = null
-	let state;
+	// let state2 = ;
 
-	let state2 = 0;
+function click() {
 
-	currentView.subscribe(value => {
-		state = value;
-	}); 
-
-
-	function updateViewportComponent() {
-		viewportComponent = Grid
-	}
-	updateViewportComponent()
-
-
-    function toggleView() {
-            currentView.update(n => n == 0 ? 1 : 0);
-            state2 = state2 == 0 ? 1 : 0;
-	}
+  if (state == 1) {
+    state = 0;
+  } else {
+    state = 0;
+    state = 1;
+  }
+  console.log(state)
+  // state2++;
+}
 </script>
 
 
@@ -65,17 +57,20 @@
 </style>
 
 <div class="contend">
+  hola
   <div class="Grid">
-    {#if viewportComponent == views[state]}
-        <div id="viewport" on:outroend={updateViewportComponent} transition:fly="{{ y: 500, duration: 5000 }}">
+    {#if 2 == 1}
+        <div id="viewport" transition:fly="{{ y: 500, duration: 5000 }}">
                   <div class="saludo" transition:fly="{{ y: 400, duration: 4000 }}"> feliz cumpleaños</div>
-            <svelte:component this={viewportComponent}>hola</svelte:component>
+            <svelte:component this={Grid}>hola</svelte:component>
         </div>
     {/if}
   </div>
-  <button on:click={toggleView}>
+  <button on:click={click}>
     {#if state == 1}
-    <Confetti />
+      <div>
+        <Confetti />
+     </div>
     {/if}
     party! 🎉
   </button>
