@@ -2,10 +2,7 @@
 	export let row = 2;
     export let column = 2;
 
-    export let visible = false;
-
-    import { fly } from 'svelte/transition';
-
+    import { state } from '../store/store.js';
 </script>
 
 <style>
@@ -16,10 +13,7 @@
     }
 </style>
 
-
-{#if visible}
-<div class="baloon" style="--column: {column}; --row: {row}" transition:fly="{{ y: 200, duration: 2000 }}">
+<div class="baloon" style="--column: {column}; --row: {row}">
     <img src="https://i.postimg.cc/vmwwSKTz/path830.png" alt="" >
 </div>   
-{/if}
 

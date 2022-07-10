@@ -1,34 +1,28 @@
 
 <script>
-	import Grid from '../src/components/Grid.svelte';
-	import Card from '../src/components/Card.svelte';
-    import Balloon from "../src/components/Balloon.svelte";
+	import Grid from './../src/components/Grid.svelte';
+    import { currentView } from '../src/store/store.js';
+    import { fly } from 'svelte/transition';
 
-    let positions = [
-        {
-            row: 1,
-            column: 1,
-        },
-        {
-            row: 1,
-            column: 5,
-        },
-        {
-            row: 2,
-            column: 2,
-        },
-        {
-            row: 2,
-            colum: 4    
-        },
-    ]
+	const views = [Grid]
 
-    import confetti from 'canvas-confetti/confetti';
+	let viewportComponent = null
+	let state;
 
-    function party() {
-        confetti();
-    }
+	currentView.subscribe(value => {
+		state = value;
+	}); 
 
+
+	function updateViewportComponent() {
+		viewportComponent = Grid
+	}
+	updateViewportComponent()
+
+
+    function toggleView() {
+            currentView.update(n => n == 0 ? 1 : 0);
+	}
 </script>
 
 
@@ -42,17 +36,35 @@
     grid-template-rows: 1fr 1fr 1fr;
 
     row-gap: 5rem;
+    }
+    button {
+    grid-column: 3;
+    grid-row: 2;
+    Place-self: center;
 }
+/* .npm {
+    grid-column: 3;
+    grid-row: 1;
+    Place-self: end;
+    font-size: 50px;
+    text-align: center;
+} */
+
 </style>
 
-
-<h1>{oro}</h1>
-<button on:click={click} >Click</button>
 <div class="contend">
-    {#each positions as position}
-        <Balloon {...position}/>
-    {/each}
+    <button on:click={toggleView}>Toggle view</button>
+    {#if viewportComponent == views[state]}
+        <div id="viewport" on:outroend={updateViewportComponent} transition:fly="{{ y: 200, duration: 2000 }}">
+            <svelte:component this={viewportComponent}>hola</svelte:component>
+        </div>
+    {/if}
+    <!-- <div class="saludo"> feliz cumpleaños</div> -->
+    <!-- <button on:click={change} >party! 🎉</button> -->
 </div>
+
+
+
 
 
 
