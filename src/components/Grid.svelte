@@ -1,7 +1,5 @@
 <script>
     import Balloon from "./Balloon.svelte";
-    import { currentView } from "../store/store.js";
-
     let positions = [
         {
             row: 1,
@@ -25,21 +23,15 @@
 
 <style>
 
-.contend {    
+.contend {  
+    position: static;;  
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
 
     row-gap: 5rem;
     }
-    .saludo {
-    grid-column: 3;
-    grid-row: 1;
-    Place-self: end;
 
-    font-size: 50px;
-    text-align: center;
-}
 
 /* Button {
     grid-column: 3;
@@ -53,6 +45,5 @@
     <Balloon {...position} />
     {/each}
 
-    <div class="saludo"> feliz cumpleaños</div>
 </div>
 

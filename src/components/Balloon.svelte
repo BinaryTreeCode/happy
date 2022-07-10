@@ -2,7 +2,6 @@
 	export let row = 2;
     export let column = 2;
 
-    import { state } from '../store/store.js';
 </script>
 
 <style>
