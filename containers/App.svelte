@@ -1,9 +1,9 @@
 <script>
-  // import Audio from './../src/components/Audio.svelte';
   import Grid from "./../src/components/Grid.svelte";
   import { fly } from "svelte/transition";
   import { Confetti } from "svelte-confetti";
   import { tick } from 'svelte'
+
 
   const music = new Audio(
     "https://binarytreecode.github.io/happy/src/assets/Cumplea%C3%B1os.mp3"
@@ -29,12 +29,11 @@
 </script>
 
 <div class="contend">
-  hola
   <div class="Grid">
     {#if state >= 1}
       <div id="viewport" transition:fly={{ y: 500, duration: 5000 }}>
         <div class="saludo" transition:fly={{ y: 400, duration: 4000 }}>
-          feliz cumpleaños
+          Feliz Cumpleaños
         </div>
         <svelte:component this={Grid}>hola</svelte:component>
       </div>
@@ -86,15 +85,36 @@
     row-gap: 5rem;
   }
   button {
+    background-color: #FFBEFF; /* Green */
     grid-column: 3;
     grid-row: 2;
     place-self: center;
-  }
 
+    border: none;
+    color: #F1FFF1;
+
+    padding: 12px 26px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 22px;
+
+    border-radius: 8px;
+    border: 2px solid #00bffff8; /* Green */
+  }
+  button:hover {
+    background-color: #00BFFF; /* Green */
+    border: 4px solid #FFBEFF; /* Green */
+    color: #FFBEFF; /* Green */
+
+    cursor: pointer;
+  }
   .Grid {
     grid-column: 1 / 6;
     grid-row: 1 / 4;
   }
+
+  @import url('https://fonts.googleapis.com/css2?family=DotGothic16&family=Roboto:ital,wght@1,100&display=swap');
   .saludo {
     grid-column: 3;
     grid-row: 1;
@@ -105,5 +125,8 @@
 
     position: relative;
     top: 180px;
+
+    font-family: 'DotGothic16', sans-serif;
+    font-family: 'Roboto', sans-serif;
   }
 </style>
