@@ -1,29 +1,81 @@
-
 <script>
-	import Audio from './../src/components/Audio.svelte';
-	import Grid from './../src/components/Grid.svelte';
-  import { fly } from 'svelte/transition';
-  import { Confetti } from "svelte-confetti"
+  // import Audio from './../src/components/Audio.svelte';
+  import Grid from "./../src/components/Grid.svelte";
+  import { fly } from "svelte/transition";
+  import { Confetti } from "svelte-confetti";
+  import { tick } from 'svelte'
 
+  const music = new Audio(
+    "https://binarytreecode.github.io/happy/src/assets/Cumplea%C3%B1os.mp3"
+  );
 
-  import mp3 from '../src/assets/Cumpleaños.mp3';
+  let state = 0;
 
-	let state = 0;
+  let state2 = 0;
+  
 
-	// let state2 = ;
+  async function click() {
+    music.play();
+    // music.volume = 0.1;
 
-function click() {
+    state++;
 
-  state = state === 0 ? 1 : 0;
- 
-  console.log(state)
-  // state2++;
-}
+    state2 = 0;
+	  await tick();
+	  state2 = 1;
+    // state2 = state2 === 0 ? 1 : 0;
+    console.log(state2);
+  }
 </script>
 
+<div class="contend">
+  hola
+  <div class="Grid">
+    {#if state >= 1}
+      <div id="viewport" transition:fly={{ y: 500, duration: 5000 }}>
+        <div class="saludo" transition:fly={{ y: 400, duration: 4000 }}>
+          feliz cumpleaños
+        </div>
+        <svelte:component this={Grid}>hola</svelte:component>
+      </div>
+    {/if}
+  </div>
+  <button on:click={click}>
+    {#if state >= 1}
+      <div>
+        <div
+          style="
+            position: fixed;
+            top: -50px;
+            left: 0;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            overflow: hidden;
+            pointer-events: none;"
+        >
+          <Confetti
+            x={[-5, 5]}
+            y={[0, 0.1]}
+            delay={[500, 2000]}
+            infinite
+            duration="5000"
+            amount="200"
+            fallDistance="100vh"
+          />
+        </div>
+      </div>
+    {/if}
+    {#if state2 === 1}
+      <Confetti destroyOnComplete={false} x={[-2, 3]} y={[2.7, 0]} amount=300 size=4 delay={[0, 250]} fallDistance=100px/>
+    {/if}
+    party! 🎉
+  </button>
+</div>
 
 <style>
-    .contend {
+  .contend {
     border: 5px solid #e1bee7;
     background-color: #fff1ff;
 
@@ -32,50 +84,26 @@ function click() {
     grid-template-rows: 1fr 1fr 1fr;
 
     row-gap: 5rem;
-    }
-    button {
+  }
+  button {
     grid-column: 3;
     grid-row: 2;
-    Place-self: center;
-}
+    place-self: center;
+  }
 
-.Grid {
+  .Grid {
     grid-column: 1 / 6;
     grid-row: 1 / 4;
-}
-.saludo {
+  }
+  .saludo {
     grid-column: 3;
     grid-row: 1;
-    Place-self: end;
+    place-self: end;
 
     font-size: 100px;
     text-align: center;
 
     position: relative;
     top: 180px;
-}
+  }
 </style>
-
-<div class="contend">
-  hola
-  <div class="Grid">
-    {#if 2 == 1}
-        <div id="viewport" transition:fly="{{ y: 500, duration: 5000 }}">
-                  <div class="saludo" transition:fly="{{ y: 400, duration: 4000 }}"> feliz cumpleaños</div>
-            <svelte:component this={Grid}>hola</svelte:component>
-        </div>
-    {/if}
-  </div>
-  <button on:click={click}>
-    {#if state == 1}
-      <div>
-        <Confetti />
-     </div>
-    {/if}
-    party! 🎉
-  </button>
-
-  <!-- <audio src={mp3}></audio> -->
-
-  <Audio {mp3} />
-</div>

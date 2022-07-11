@@ -20,7 +20,7 @@
   </script>
   
   <div>
-      <audio
+      <audio autoplay
           bind:this={player}
           {src}
           controls>
