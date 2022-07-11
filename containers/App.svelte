@@ -1,8 +1,12 @@
 
 <script>
+	import Audio from './../src/components/Audio.svelte';
 	import Grid from './../src/components/Grid.svelte';
-    import { fly } from 'svelte/transition';
-    import { Confetti } from "svelte-confetti"
+  import { fly } from 'svelte/transition';
+  import { Confetti } from "svelte-confetti"
+
+
+  import mp3 from '../src/assets/Cumpleaños.mp3';
 
 	let state = 0;
 
@@ -10,12 +14,8 @@
 
 function click() {
 
-  if (state == 1) {
-    state = 0;
-  } else {
-    state = 0;
-    state = 1;
-  }
+  state = state === 0 ? 1 : 0;
+ 
   console.log(state)
   // state2++;
 }
@@ -75,4 +75,7 @@ function click() {
     party! 🎉
   </button>
 
+  <!-- <audio src={mp3}></audio> -->
+
+  <Audio {mp3} />
 </div>

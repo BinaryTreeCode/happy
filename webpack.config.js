@@ -24,6 +24,10 @@ module.exports = {
                 use: {
                     loader: 'svelte-loader'
                 }
+            },
+            {
+                test: /\.mp3/,
+                type: "asset/resource"
             }
         ]
     },
